@@ -1,0 +1,40 @@
+<import src="product-item/product-item.wxml"/>
+<view class="content">
+    <loading hidden="{{hiddenLoadingDict[activeId]}}">数据正在加载</loading>
+    <scroll-view class="tag_list" scroll-x>
+        <block wx:if="{{tagList.length != 0}}" wx:key="{{item.id}}">
+            <text class="tag_item {{activeId == item.id ? 'selected' : ''}}"
+                  wx:for="{{tagList}}" wx:key="{{item.id}}"
+                  id="{{item.id}}"
+                  bindtap="toggleTag"
+            >{{item.name}}</text>
+        </block>
+    </scroll-view>
+    <view class="content_box">
+        <block wx:if="{{bannerDict[activeId].length != 0}}">
+            <swiper indicator-dots="{{indicatorDots}}" class="swiper_banner"
+                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+                    style="height: {{bannerHeight}};" indicator-color="#fff" indicator-active-color="#fd202d"
+            >
+                <block wx:for="{{bannerDict[activeId]}}" wx:key="{{item.id}}">
+                    <swiper-item>
+                        <image src="{{item.image}}"
+                               class="slide-image"
+                               style="width: {{bannerWidth}}; height: {{bannerHeight}};"
+                        />
+                    </swiper-item>
+                </block>
+            </swiper>
+        </block>
+
+        <!--product-item-->
+        <block wx:if="{{productDict[activeId].list.length != 0}}">
+            <view class="product_list">
+                <template is='productItemTemplate'
+                          wx:for="{{productDict[activeId].list}}"
+                          wx:key="{{item.id}}"
+                          data="{{...item, index: index}}"/>
+            </view>
+        </block>
+    </view>
+</view>

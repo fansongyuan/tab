@@ -1,0 +1,13 @@
+<template name="productItemTemplate">
+    <view class="product_item {{index % 2 == 0 ? 'border_right' : ''}}">
+        <image src="{{thumbnail}}" class="product_thumbnail"/>
+        <view class="product_title">{{name}}</view>
+        <view class="product_brief">{{brief}}</view>
+        <view class="price">
+            <text class="sell_price">￥{{sellPrice}}</text>
+            <block wx:if="{{sellPrice != originalPrice}}">
+                <text class="origin_price">￥{{originalPrice}}</text>
+            </block>
+        </view>
+    </view>
+</template>
